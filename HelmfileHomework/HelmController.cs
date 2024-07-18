@@ -5,17 +5,17 @@ namespace HelmfileHomework;
 [ApiController]
 public class HelmController : Controller
 {
-    private readonly ReadinessProbeProvider _readinessProbeProvider;
+    private readonly ReadinessProbeHealthCheck _readinessProbeHealthCheck;
 
-    public HelmController(ReadinessProbeProvider readinessProbeProvider)
+    public HelmController(ReadinessProbeHealthCheck readinessProbeHealthCheck)
     {
-        _readinessProbeProvider = readinessProbeProvider;
+        _readinessProbeHealthCheck = readinessProbeHealthCheck;
     }
 
     [HttpPost("switch-readiness")]
     public IActionResult SwitchReadiness()
     {
-        _readinessProbeProvider.IsReady = false;
+        _readinessProbeHealthCheck.IsReady = false;
         return Ok();
     }
 }
