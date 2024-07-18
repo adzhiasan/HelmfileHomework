@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Namespace }}
-        image: counter-image:latest
+        image: helmfile-homework:latest
         imagePullPolicy: Never
         resources:
           limits:
