@@ -11,17 +11,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ReadinessProbeHealthCheck>();
 
 builder.Services.AddHealthChecks()
-    .AddCheck("liveness_check", () => HealthCheckResult.Healthy(), tags: new[] { "liveness" });
-builder.Services.AddHealthChecks()
     .AddCheck<ReadinessProbeHealthCheck>("readiness_check", failureStatus: HealthStatus.Unhealthy,
         tags: new[] { "ready" });
 
 var app = builder.Build();
 
-app.MapHealthChecks("/checks/liveness", new HealthCheckOptions
-{
-    Predicate = check => check.Tags.Contains("liveness")
-});
+app.MapHealthChecks("/checks/liveness");
 app.MapHealthChecks("/checks/readiness", new HealthCheckOptions
 {
     Predicate = check => check.Tags.Contains("ready")
