@@ -1,0 +1,10 @@
+hpa:
+  minReplicas: 1
+  maxReplicas: 5
+  enabled: true
+app:
+  name: helmfile-homework
+  service: helmfile-homework
+ingress:
+  host: hello.world
+  enabled: true

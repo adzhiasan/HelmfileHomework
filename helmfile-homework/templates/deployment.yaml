@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 20%
+      maxUnavailable: 1
+  replicas: 5
+  selector:
+    matchLabels:
+      app: {{ .Release.Namespace }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Namespace }}
+    spec:
+      containers:
+      - name: {{ .Release.Namespace }}
+        image: counter-image:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "50Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /checks/readiness
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /checks/liveness
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20

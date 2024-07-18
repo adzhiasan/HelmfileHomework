@@ -1,0 +1,6 @@
+releases:
+  - name: homework
+    namespace: homework
+    chart: ./helmfile-homework
+    values:
+      - ./helmfile-homework/values.yaml
