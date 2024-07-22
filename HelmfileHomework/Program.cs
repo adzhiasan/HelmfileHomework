@@ -1,6 +1,7 @@
 using HelmfileHomework;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,5 +34,7 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.UseHttpsRedirection();
+
+app.UseMetricServer();
 
 app.Run();
