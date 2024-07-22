@@ -7,5 +7,6 @@ spec:
   selector:
     app: {{ .Release.Namespace }}
   ports:
-  - port: 8080
+  - name: alias8080
+    port: 8080
     targetPort: 8080

@@ -1,6 +1,16 @@
+repositories:
+- name: prometheus
+  url: https://prometheus-community.github.io/helm-charts
+
 releases:
+  - name: prometheus
+    namespace: monitoring
+    chart: prometheus/kube-prometheus-stack
+
   - name: homework
     namespace: homework
     chart: ./helmfile-homework
     values:
       - ./helmfile-homework/values.yaml
+    needs:
+      - monitoring/prometheus  
