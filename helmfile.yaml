@@ -3,9 +3,10 @@ repositories:
   url: https://prometheus-community.github.io/helm-charts
 
 releases:
-  - name: prometheus
+  - name: monitoring
     namespace: monitoring
     chart: prometheus/kube-prometheus-stack
+    disableValidationOnInstall: true
 
   - name: homework
     namespace: homework
@@ -13,4 +14,5 @@ releases:
     values:
       - ./helmfile-homework/values.yaml
     needs:
-      - monitoring/prometheus  
+      - monitoring/monitoring
+    disableValidationOnInstall: true
