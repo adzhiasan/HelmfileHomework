@@ -3,9 +3,12 @@ kind: Service
 metadata:
   name: {{ .Values.app.service }}
   namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}
 spec:
   selector:
-    app: {{ .Release.Namespace }}
+    app: {{ .Release.Name }}
   ports:
-  - port: 8080
+  - name: alias8080
+    port: 8080
     targetPort: 8080
