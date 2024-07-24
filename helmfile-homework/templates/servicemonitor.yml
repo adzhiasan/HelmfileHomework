@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: {{ .Release.Name }}-servicemonitor
   labels:
-    release: monitoring  // неймспейс где установлен prometheus
+    release: monitoring
 spec:
   selector:
     matchLabels:
